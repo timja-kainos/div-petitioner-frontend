@@ -35,7 +35,7 @@ coverage test test-validation test-unit test-nsp test-coverage eslint setup:
 start-debug start-dev:
 	@$(call compose, run --service-ports frontend yarn run $@)
 
-test-e2e test-a11y:
+test-e2e test-a11y test-smoke-e2e:
 	@$(call compose, run codecept /bin/sh -c "xvfb-run npm run $@")
 
 clean:
