@@ -8,26 +8,36 @@ exports.config = {
   'output': './output',
   'timeout': 1000,
   'helpers': {
-    'Nightmare': {
+    'Puppeteer': {
       'url': process.env.E2E_FRONTEND_URL || 'https://localhost:8080',
       'waitForTimeout': waitForTimeout,
-      'typeInterval': 20,
       'waitForAction': waitForAction,
-      'show': false,
-      'switches': {
-        'ignore-certificate-errors': true
+      'show': true,
+      'chrome': {
+        'ignoreHTTPSErrors': true,
+        'args': ['--no-sandbox']
       }
     },
+    // 'Nightmare': {
+    //     'url': process.env.E2E_FRONTEND_URL || 'https://localhost:8080',
+    //     'waitForTimeout': waitForTimeout,
+    //     'typeInterval': 20,
+    //     'waitForAction': waitForAction,
+    //     'show': false,
+    //     'switches': {
+    //         'ignore-certificate-errors': true
+    //     }
+    // },
     'FeatureToggleHelper': {
       'require': './helpers/featureToggleHelper.js'
     },
     'ElementExist': {
       'require': './helpers/ElementExist.js'
     },
-    'NightmareExtras': {
-      'require': './helpers/NightmareExtras.js',
-      'waitForTimeout': waitForTimeout
-    },
+    // 'NightmareExtras': {
+    //   'require': './helpers/NightmareExtras.js',
+    //   'waitForTimeout': waitForTimeout
+    // },
     'IdamHelper': {
       'require': './helpers/idamHelper.js'
     }
