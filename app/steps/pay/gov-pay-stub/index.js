@@ -12,7 +12,7 @@ module.exports = class GovPayStub extends OptionStep {
     return '/pay/gov-pay-stub';
   }
 
-  next() {
+  get nextStep() {
     return this.steps.CardPaymentStatus;
   }
 
