@@ -1,6 +1,11 @@
 const logger = require('@hmcts/nodejs-logging').getLogger(__filename);
+const clientId = require('app/services/idam').clientId;
 
 class DivLogger {
+  // **
+  // * Public functions
+  // **
+
   info(message) {
     logger.info(this._getMessagePrefix() + message);
   }
@@ -25,9 +30,12 @@ class DivLogger {
     logger.debug(this._getMessagePrefix() + message);
   }
 
+  // **
+  // * Private functions
+  // **
+
   _getMessagePrefix() {
-    const userId = 'xxx';
-    return `(uid: ${userId}) `;
+    return `(uid: ${clientId}) `;
   }
 }
 
