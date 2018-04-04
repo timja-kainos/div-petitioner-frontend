@@ -31,6 +31,8 @@ module.exports = {
   },
   logout: () => {
     return idamExpressMiddleware.logout(idamArgs);
+  },
+  clientId: () => {
+    return idamArgs.idamClientID;
   }
-
 };
