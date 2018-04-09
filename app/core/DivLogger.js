@@ -1,33 +1,49 @@
-const logger = require('@hmcts/nodejs-logging').getLogger(__filename);
-const clientId = require('app/services/idam').clientId;
+const NodejsLogger = require('@hmcts/nodejs-logging');
+const clientId = require('app/services/idam').clientId();
 
 class DivLogger {
   // **
   // * Public functions
   // **
 
+  constructor(filename) {
+    this.nodejsLogger = NodejsLogger.getLogger(filename);
+  }
+
   info(message) {
-    logger.info(this._getMessagePrefix() + message);
+    this.nodejsLogger.info(`${this._getMessagePrefix()} ${message}`);
   }
 
   warn(message) {
-    logger.warn(this._getMessagePrefix() + message);
+    this.nodejsLogger.warn(`${this._getMessagePrefix()} ${message}`);
   }
 
   error(message) {
-    logger.error(this._getMessagePrefix() + message);
+    this.nodejsLogger.error(`${this._getMessagePrefix()} ${message}`);
   }
 
   fatal(message) {
-    logger.trace(this._getMessagePrefix() + message);
+    this.nodejsLogger.trace(`${this._getMessagePrefix()} ${message}`);
   }
 
   trace(message) {
-    logger.trace(this._getMessagePrefix() + message);
+    this.nodejsLogger.trace(`${this._getMessagePrefix()} ${message}`);
   }
 
   debug(message) {
-    logger.debug(this._getMessagePrefix() + message);
+    this.nodejsLogger.debug(`${this._getMessagePrefix()} ${message}`);
+  }
+
+  // **
+  // * Public static functions
+  // **
+
+  static getLogger(name) {
+    return new DivLogger(name);
+  }
+
+  static config(config) {
+    NodejsLogger.config(config);
   }
 
   // **
@@ -35,7 +51,7 @@ class DivLogger {
   // **
 
   _getMessagePrefix() {
-    return `(uid: ${clientId}) `;
+    return `(uid: ${clientId})`;
   }
 }
 
