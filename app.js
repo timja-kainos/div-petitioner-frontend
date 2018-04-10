@@ -26,6 +26,7 @@ const i18nTemplate = require('app/core/utils/i18nTemplate')({
   fileExtension: 'html'
 });
 const statusCode = require('app/core/utils/statusCode');
+const divLogging = require('app/core/DivLogger');
 const logging = require('@hmcts/nodejs-logging');
 const events = require('events');
 
@@ -40,7 +41,7 @@ const nunjucksFilters = require('app/filters/nunjucks');
 
 const PORT = process.env.HTTP_PORT || CONF.http.port;
 
-const logger = logging.getLogger(__filename);
+const logger = divLogging.getLogger(__filename);
 
 exports.init = () => {
   const app = express();
@@ -52,7 +53,7 @@ exports.init = () => {
     team: CONF.project,
     environment: CONF.environment
   });
-  app.use(logging.express.accessLogger());
+  app.use(logging.express.accessLogger({ logger: divLogging.getLogger('express.access') }));
 
   // content security policy to allow only assets from same domain
   app.use(helmet.contentSecurityPolicy({

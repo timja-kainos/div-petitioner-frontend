@@ -1,5 +1,5 @@
 const clamAv = require('clam-engine');
-const logger = require('@hmcts/nodejs-logging').getLogger(__filename);
+const logger = require('app/core/DivLogger').getLogger(__filename);
 const errors = require('app/resources/errors');
 const fileManagement = require('app/services/fileManagement');
 

@@ -1,7 +1,7 @@
 const CONF = require('config');
 const superagent = require('superagent');
 const httpStatus = require('http-status-codes');
-const logger = require('@hmcts/nodejs-logging').getLogger(__filename);
+const logger = require('app/core/DivLogger').getLogger(__filename);
 const errors = require('app/resources/errors');
 const fileManagment = require('app/services/fileManagement');
 
