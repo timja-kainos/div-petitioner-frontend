@@ -8,11 +8,11 @@ const applicationFeeMiddleware = require('app/middleware/updateApplicationFeeMid
 const { expect, sinon } = require('test/util/chai');
 const statusCodes = require('http-status-codes');
 const { withSession } = require('test/util/setup');
-const jwt = require('jsonwebtoken');
 const serviceToken = require('app/services/serviceToken');
 const payment = require('app/services/payment');
 const submission = require('app/services/submission');
 const CONF = require('config');
+const idam = require('app/services/idam');
 
 const modulePath = 'app/steps/pay/pay-online-only';
 
@@ -28,11 +28,20 @@ const version = CONF.commonProps.applicationFee.version;
 const amount = parseInt(
   CONF.commonProps.applicationFee.fee_amount
 );
+const userDetails = {
+  id: 1,
+  email: 'email@email.com'
+};
+const idamUserDetailsMiddlewareMock = (req, res, next) => {
+  req.idam = { userDetails };
+  next();
+};
 
 describe(modulePath, () => {
   beforeEach(() => {
     sinon.stub(applicationFeeMiddleware, 'updateApplicationFeeMiddleware')
       .callsArgWith(two);
+    sinon.stub(idam, 'userDetails').returns(idamUserDetailsMiddlewareMock);
     featureTogglesMock.stub();
     idamMock.stub();
     s = server.init();
@@ -45,6 +54,7 @@ describe(modulePath, () => {
     idamMock.restore();
     featureTogglesMock.restore();
     applicationFeeMiddleware.updateApplicationFeeMiddleware.restore();
+    idam.userDetails.restore();
   });
 
   describe('#middleware', () => {
@@ -88,11 +98,9 @@ describe(modulePath, () => {
       sinon.stub(serviceToken, 'setup').returns({ getToken });
       sinon.stub(payment, 'setup').returns({ create });
       sinon.stub(submission, 'setup').returns({ update });
-      sinon.stub(jwt, 'decode').returns({ id: 1 });
     });
 
     afterEach(() => {
-      jwt.decode.restore();
       submission.setup.restore();
       payment.setup.restore();
       serviceToken.setup.restore();

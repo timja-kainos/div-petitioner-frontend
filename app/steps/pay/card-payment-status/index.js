@@ -1,8 +1,8 @@
-const jwt = require('jsonwebtoken');
 const logger = require('@hmcts/nodejs-logging').getLogger(__filename);
 const { features } = require('@hmcts/div-feature-toggle-client')().featureToggles;
 const initSession = require('app/middleware/initSession');
 const sessionTimeout = require('app/middleware/sessionTimeout');
+const idam = require('app/services/idam');
 const { restoreFromDraftStore } = require('app/middleware/draftPetitionStoreMiddleware');
 
 const Step = require('app/core/Step');
@@ -43,11 +43,20 @@ module.exports = class CardPaymentStatus extends Step {
 
     if (features.idam) {
       authToken = req.cookies['__auth-token'];
+
+      const idamUserId = idam.userId(req);
+      if (!idamUserId) {
+        logger.error('User does not have any idam userDetails');
+        res.redirect('/generic-error');
+        return;
+      }
+
       user = {
-        id: jwt.decode(authToken).id,
+        id: idamUserId,
         bearerToken: authToken
       };
     }
+
     const caseId = req.session.caseId;
 
     // Initialise services.
