@@ -9,13 +9,16 @@ Feature('Payment method');
 
 Scenario('Fee displays on /index page', function (I) {
   I.amOnPage('/index');
+  I.waitForText(indexContent.useThisService);
   I.see(indexFeeContent);
 });
 
 Scenario('Fee displays on /pay/help/need-help page', function (I) {
   I.amOnPage('/index');
   I.startApplication();
+  I.seeCurrentUrlEquals('/screening-questions/has-marriage-broken');
   I.amOnPage('/pay/help/need-help');
+  I.waitForText(payHelpContent.question);
   I.see(payHelpFeeContent);
 });
 

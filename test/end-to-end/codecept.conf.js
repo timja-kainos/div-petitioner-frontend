@@ -6,7 +6,6 @@ console.log('waitForAction value set to', waitForAction); // eslint-disable-line
 exports.config = {
   'tests': './paths/**/*.js',
   'output': './output',
-  'timeout': 1000,
   'helpers': {
     'Puppeteer': {
       'url': process.env.E2E_FRONTEND_URL || 'https://localhost:8080',
