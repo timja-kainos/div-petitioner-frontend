@@ -1,7 +1,7 @@
 const co = require('co');
 const { curry, get, reduce, cloneDeep } = require('lodash');
 const { removeStaleData } = require('app/core/staleDataManager');
-const logger = require('@hmcts/nodejs-logging').getLogger(__filename);
+const logger = require('app/services/logger').logger(__filename);
 const statusCode = require('app/core/utils/statusCode');
 const transformationServiceClient = require('app/services/transformationServiceClient');
 const mockedClient = require('app/services/mocks/transformationServiceClient');
@@ -47,7 +47,7 @@ const saveSessionToDraftPetitionStore = (req, session,
   return client.saveToDraftStore(authToken,
     sessionToSaveToDraftStore, sendEmail)
     .catch(error => {
-      logger.error(`Unable to save to draft store ${error}`);
+      logger.error(`Unable to save to draft store ${error}`, req);
       throw error;
     });
 };
@@ -202,7 +202,7 @@ module.exports = curry((step, req, res) => {
       }
     }
   }).catch(error => {
-    logger.error(`Error in step handler: ${error}`);
+    logger.error(`Error in step handler: ${error}`, req);
     res.redirect('/generic-error');
   });
 });

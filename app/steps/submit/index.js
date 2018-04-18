@@ -1,5 +1,5 @@
 const statusCodes = require('http-status-codes');
-const logger = require('@hmcts/nodejs-logging').getLogger(__filename);
+const logger = require('app/services/logger').logger(__filename);
 const initSession = require('app/middleware/initSession');
 const sessionTimeout = require('app/middleware/sessionTimeout');
 const { restoreFromDraftStore } = require('app/middleware/draftPetitionStoreMiddleware');
@@ -30,7 +30,7 @@ module.exports = class Submit extends Step {
     const { method, cookies } = req;
 
     if (method.toLowerCase() !== 'get' || !cookies || !cookies['connect.sid']) {
-      logger.error('Malformed request to Submit step');
+      logger.error('Malformed request to Submit step', req);
       const step = this.steps.Error400;
       const content = step.generateContent();
       res.status(statusCodes.BAD_REQUEST)
@@ -79,7 +79,7 @@ module.exports = class Submit extends Step {
       })
       .catch(error => {
         delete req.session.submissionStarted;
-        logger.error(`Error during submission step: ${error}`);
+        logger.error(`Error during submission step: ${error}`, req);
         res.redirect('/generic-error');
       });
   }

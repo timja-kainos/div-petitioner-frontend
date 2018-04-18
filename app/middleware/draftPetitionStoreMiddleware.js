@@ -1,5 +1,5 @@
 const CONF = require('config');
-const logger = require('@hmcts/nodejs-logging').getLogger(__filename);
+const logger = require('app/services/logger').logger(__filename);
 const transformationServiceClient = require('app/services/transformationServiceClient');
 const mockedClient = require('app/services/mocks/transformationServiceClient');
 const httpStatus = require('http-status-codes');
@@ -53,7 +53,7 @@ const restoreFromDraftStore = (req, res, next) => {
     })
     .catch(error => {
       if (error.statusCode !== httpStatus.NOT_FOUND) {
-        logger.error(`Error when attempting to restore session from draft store ${error}`);
+        logger.error(`Error when attempting to restore session from draft store ${error}`, req);
       }
       next();
     });
@@ -69,7 +69,7 @@ const removeFromDraftStore = (req, res, next) => {
     .then(next)
     .catch(error => {
       if (error.statusCode !== httpStatus.NOT_FOUND) {
-        logger.error(`Error when attempting to restore session from draft store ${error}`);
+        logger.error(`Error when attempting to restore session from draft store ${error}`, req);
         return res.redirect('/generic-error');
       }
       return next();
