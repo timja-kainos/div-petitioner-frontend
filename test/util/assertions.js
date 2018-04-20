@@ -397,9 +397,15 @@ exports.testHttpStatus = (done, agent, underTest, status, method = 'get') => {
     .then(() => done(), done);
 };
 
-exports.testCustom = (done, agent, underTest, cookies = [], callback, method = 'get') => {
+exports.testCustom = (done, agent, underTest, cookies = [], callback, method = 'get', data) => {
   const runCallback = () => {
     let request = agent[method](underTest.url);
+
+    if (data){
+      request
+        .type('form')
+        .send(data);
+    }
     
     if (method !== 'get') {
       request.set('X-CSRF-token', agent.csrfToken);
