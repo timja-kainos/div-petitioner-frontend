@@ -1,5 +1,5 @@
 const DestroySessionStep = require('app/core/DestroySessionStep');
-const runStepHandler = require('app/core/handler/runStepHandler');
+const { runStepHandler } = require('app/core/handler/runStepHandler');
 const paymentService = require('app/services/payment');
 
 module.exports = class DoneAndSubmitted extends DestroySessionStep {

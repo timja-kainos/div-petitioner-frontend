@@ -1,5 +1,5 @@
 const OptionStep = require('app/core/OptionStep');
-const runStepHandler = require('app/core/handler/runStepHandler');
+const { runStepHandler } = require('app/core/handler/runStepHandler');
 const { watch } = require('app/core/staleDataManager');
 
 module.exports = class RespondentCorrespondenceUseHomeAddress extends OptionStep {

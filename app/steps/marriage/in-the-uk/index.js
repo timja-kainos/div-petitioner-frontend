@@ -1,5 +1,5 @@
 const OptionStep = require('app/core/OptionStep');
-const runStepHandler = require('app/core/handler/runStepHandler');
+const { runStepHandler } = require('app/core/handler/runStepHandler');
 
 module.exports = class MarriedInUk extends OptionStep {
   get url() {

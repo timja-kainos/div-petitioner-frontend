@@ -1,6 +1,6 @@
 const ValidationStep = require('app/core/ValidationStep');
 const { isEmpty } = require('lodash');
-const runStepHandler = require('app/core/handler/runStepHandler');
+const { runStepHandler } = require('app/core/handler/runStepHandler');
 const { watch } = require('app/core/staleDataManager');
 
 module.exports = class UnreasonableBehaviour extends ValidationStep {

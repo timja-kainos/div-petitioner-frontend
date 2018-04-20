@@ -1,5 +1,5 @@
 const DestroySessionStep = require('app/core/DestroySessionStep');
-const runStepHandler = require('app/core/handler/runStepHandler');
+const { runStepHandler } = require('app/core/handler/runStepHandler');
 const draftPetitionStoreMiddleware = require('app/middleware/draftPetitionStoreMiddleware');
 
 module.exports = class ExitRemovedSavedApplication extends DestroySessionStep {

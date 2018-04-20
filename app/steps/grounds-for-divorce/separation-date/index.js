@@ -3,7 +3,7 @@ const moment = require('moment');
 const OptionStep = require('app/core/OptionStep');
 const utils = require('app/services/utils');
 const { filter, some, isEmpty, map } = require('lodash');
-const runStepHandler = require('app/core/handler/runStepHandler');
+const { runStepHandler } = require('app/core/handler/runStepHandler');
 const { watch } = require('app/core/staleDataManager');
 
 const DATE_FORMAT = CONF.dateFormat;

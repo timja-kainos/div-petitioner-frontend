@@ -1,6 +1,6 @@
 const { last, clone } = require('lodash');
 const OptionStep = require('app/core/OptionStep');
-const runStepHandler = require('app/core/handler/runStepHandler');
+const { runStepHandler } = require('app/core/handler/runStepHandler');
 const {
   applyConnections,
   areBothDomiciled,

@@ -1,5 +1,5 @@
 const AddressLookupStep = require('app/components/AddressLookupStep');
-const runStepHandler = require('app/core/handler/runStepHandler');
+const { runStepHandler } = require('app/core/handler/runStepHandler');
 
 module.exports = class RespondentCorrespondenceAddress extends AddressLookupStep {
   handler(req, res) {

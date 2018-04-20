@@ -1,5 +1,5 @@
 const DestroySessionStep = require('app/core/DestroySessionStep');
-const runStepHandler = require('app/core/handler/runStepHandler');
+const { runStepHandler } = require('app/core/handler/runStepHandler');
 
 module.exports = class ExitNoCertificateTranslated extends DestroySessionStep {
   handler(req, res) {

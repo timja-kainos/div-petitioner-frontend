@@ -3,7 +3,7 @@ const { expect, sinon } = require('test/util/chai');
 const mockedClient = require('app/services/mocks/transformationServiceClient');
 
 const modulePath = 'app/core/handler/runStepHandler';
-const underTest = require(modulePath);
+const underTest = require(modulePath).runStepHandler;
 
 //  need to move this so common is loaded at runtime into the app
 //  will make it easier to test once core files are moved out into

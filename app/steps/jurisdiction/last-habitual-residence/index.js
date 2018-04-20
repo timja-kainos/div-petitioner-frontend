@@ -1,5 +1,5 @@
 const OptionStep = require('app/core/OptionStep');
-const runStepHandler = require('app/core/handler/runStepHandler');
+const { runStepHandler } = require('app/core/handler/runStepHandler');
 const { isEmpty, last, clone } = require('lodash');
 const {
   applyConnections, areBothLastHabitualResident,

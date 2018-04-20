@@ -1,5 +1,5 @@
 const ValidationStep = require('app/core/ValidationStep');
-const runStepHandler = require('app/core/handler/runStepHandler');
+const { runStepHandler } = require('app/core/handler/runStepHandler');
 const { watch } = require('app/core/staleDataManager');
 
 module.exports = class AdulteryWhere extends ValidationStep {

@@ -1,5 +1,5 @@
 const OptionStep = require('app/core/OptionStep');
-const runStepHandler = require('app/core/handler/runStepHandler');
+const { runStepHandler } = require('app/core/handler/runStepHandler');
 const { applyConnections, clearProceedingSteps } = require('app/services/jurisdiction/connections');
 
 module.exports = class JurisdictionResidual extends OptionStep {

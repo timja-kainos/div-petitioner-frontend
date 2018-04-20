@@ -1,5 +1,5 @@
 const OptionStep = require('app/core/OptionStep');
-const runStepHandler = require('app/core/handler/runStepHandler');
+const { runStepHandler } = require('app/core/handler/runStepHandler');
 
 const { first, clone, merge } = require('lodash');
 const { hasLivedMonths, isHabitualResident, clearProceedingSteps, applyConnections } = require('app/services/jurisdiction/connections');

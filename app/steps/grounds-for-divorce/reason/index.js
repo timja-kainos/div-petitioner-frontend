@@ -1,7 +1,7 @@
 const moment = require('moment');
 const { isUndefined } = require('lodash');
 const OptionStep = require('app/core/OptionStep');
-const runStepHandler = require('app/core/handler/runStepHandler');
+const { runStepHandler } = require('app/core/handler/runStepHandler');
 const { watch } = require('app/core/staleDataManager');
 
 const datePeriod = require('app/core/utils/datePeriod');

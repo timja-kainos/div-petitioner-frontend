@@ -46,7 +46,7 @@ const saveSessionToDraftPetitionStore = (req, session,
     });
 };
 
-module.exports = curry((step, req, res) => {
+const runStepHandler = curry((step, req, res) => {
   //  extract data from the request
   const stepData = step.parseRequest(req);
 
@@ -200,3 +200,5 @@ module.exports = curry((step, req, res) => {
     res.redirect('/generic-error');
   });
 });
+
+module.exports = { runStepHandler };

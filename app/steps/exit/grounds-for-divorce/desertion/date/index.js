@@ -1,5 +1,5 @@
 const Step = require('app/core/Step');
-const runStepHandler = require('app/core/handler/runStepHandler');
+const { runStepHandler } = require('app/core/handler/runStepHandler');
 
 module.exports = class ExitDesertionDate extends Step {
   handler(req, res) {

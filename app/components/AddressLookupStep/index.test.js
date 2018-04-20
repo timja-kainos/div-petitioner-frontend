@@ -2,7 +2,7 @@ const { merge } = require('lodash');
 const request = require('supertest');
 const { testContent, testCYATemplate, testExistenceCYA, testErrors } = require('test/util/assertions');
 const { withSession } = require('test/util/setup');
-const runStepHandler = require('app/core/handler/runStepHandler');
+const { runStepHandler } = require('app/core/handler/runStepHandler');
 const server = require('app');
 
 const modulePath = 'app/components/AddressLookupStep';

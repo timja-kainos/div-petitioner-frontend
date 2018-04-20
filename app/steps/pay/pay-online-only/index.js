@@ -1,5 +1,5 @@
 const Step = require('app/core/Step');
-const runStepHandler = require('app/core/handler/runStepHandler');
+const { runStepHandler } = require('app/core/handler/runStepHandler');
 const { features } = require('@hmcts/div-feature-toggle-client')().featureToggles;
 const applicationFeeMiddleware = require('app/middleware/updateApplicationFeeMiddleware');
 const serviceTokenService = require('app/services/serviceToken');

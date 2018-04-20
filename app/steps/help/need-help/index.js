@@ -1,5 +1,5 @@
 const OptionStep = require('app/core/OptionStep');
-const runStepHandler = require('app/core/handler/runStepHandler');
+const { runStepHandler } = require('app/core/handler/runStepHandler');
 const applicationFeeMiddleware = require('app/middleware/updateApplicationFeeMiddleware');
 
 module.exports = class NeedHelpWithFees extends OptionStep {

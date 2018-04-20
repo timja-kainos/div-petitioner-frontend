@@ -1,5 +1,5 @@
 const Step = require('app/core/Step');
-const runStepHandler = require('app/core/handler/runStepHandler');
+const { runStepHandler } = require('app/core/handler/runStepHandler');
 const initSession = require('app/middleware/initSession');
 const applicationFeeMiddleware = require('app/middleware/updateApplicationFeeMiddleware');
 

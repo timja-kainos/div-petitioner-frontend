@@ -1,5 +1,5 @@
 const Page = require('app/core/steps/Page');
-const runStepHandler = require('app/core/handler/runStepHandler');
+const { runStepHandler } = require('app/core/handler/runStepHandler');
 
 module.exports = class SubmittedError extends Page {
   get url() {

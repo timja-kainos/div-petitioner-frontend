@@ -1,4 +1,4 @@
-const runStepHandler = require('app/core/handler/runStepHandler');
+const { runStepHandler } = require('app/core/handler/runStepHandler');
 const ValidationStep = require('app/core/ValidationStep');
 const evidenceManagmentMiddleware = require('app/middleware/evidenceManagmentMiddleware');
 const courtsAllocation = require('app/services/courtsAllocation');
