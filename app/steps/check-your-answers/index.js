@@ -7,7 +7,6 @@ const CONF = require('config');
 const { features } = require('@hmcts/div-feature-toggle-client')().featureToggles;
 const statusCodes = require('http-status-codes');
 const submissionService = require('app/services/submission');
-const co = require('co');
 const sessionBlacklistedAttributes = require('app/resources/sessionBlacklistedAttributes');
 
 const maximumNumberOfSteps = 500;
@@ -25,18 +24,14 @@ module.exports = class CheckYourAnswers extends ValidationStep {
       return coreHandler.runStepHandler(this, req, res);
     }
 
-    const self = this;
-    return co(function* generator() {
-      // validate post request
-      const ctx = self.parseRequest(req);
-      const [isValid] = yield self.validate(ctx, req.session);
+    // validate post request
+    const ctx = this.parseRequest(req);
+    const [isValid] = this.validate(ctx, req.session);
 
-      if (isValid) {
-        self.submitApplication(req, res);
-      } else {
-        coreHandler.runStepHandler(self, req, res);
-      }
-    });
+    if (isValid) {
+      return this.submitApplication(req, res);
+    }
+    return coreHandler.runStepHandler(this, req, res);
   }
 
   get url() {
