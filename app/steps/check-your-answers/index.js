@@ -8,6 +8,7 @@ const { features } = require('@hmcts/div-feature-toggle-client')().featureToggle
 const statusCodes = require('http-status-codes');
 const submissionService = require('app/services/submission');
 const co = require('co');
+const sessionBlacklistedAttributes = require('app/resources/sessionBlacklistedAttributes');
 
 const maximumNumberOfSteps = 500;
 
@@ -293,15 +294,7 @@ module.exports = class CheckYourAnswers extends ValidationStep {
 
     // We blacklist a few session keys which are internal to the application and
     // are not needed for the submission.
-    const blacklistedProperties = [
-      'cookie',
-      'expires',
-      'stepTemplates',
-      'currentPaymentId',
-      'payments',
-      'caseId'
-    ];
-    const payload = blacklistedProperties.reduce((acc, item) => {
+    const payload = sessionBlacklistedAttributes.reduce((acc, item) => {
       delete acc[item];
       return acc;
     }, Object.assign({}, req.session));
